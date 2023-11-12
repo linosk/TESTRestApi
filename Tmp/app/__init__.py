@@ -1,1 +1,0 @@
-from app.calc import add
