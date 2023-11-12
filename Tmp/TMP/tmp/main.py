@@ -3,6 +3,7 @@ from typing import Union
 from fastapi.params import Body
 from pydantic import BaseModel
 from typing import Optional
+import psycopg2
 
 app = FastAPI()
 
@@ -13,7 +14,9 @@ class Post(BaseModel):
     #optional value
     published: bool = True
     #totally optional field
-    rating: Optional[int] = None
+
+try:
+    conn = psycopg2.connect(host,d)
 
 #@app.get(...) - to specify urls for FastAPI
 #async its basically sth about concurency, read about it later
@@ -43,3 +46,12 @@ def create_posts(new_post: Post):
 #STATUS CODE REMEMBER, STATUS IN FASTAPI FOR EXAMPLE
 #STATUS CODES!!!
 #FAST API AUTOMATIC DOCUMMENTATION
+
+#psycopg2 - DRIVER FOR
+#SQLALCHEMY - ORM
+#PYDANTIC MODEL
+#AUTHENTICATION LATER
+#SQL RELATION
+#VOTE ROUTE
+#DIFFERENT DELPOYMNET
+#DOCKER
