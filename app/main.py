@@ -6,7 +6,7 @@ try:
         user="postgres",
         password="postgres",
         host="127.0.0.1",
-        port="5423",
+        port="5432",
         database="fastapi"
     )
 
