@@ -1,6 +1,7 @@
 import psycopg2
 from psycopg2 import Error
 from psycopg2.extras import RealDictCursor
+from fastapi import FastAPI
 
 def main():
     
@@ -15,7 +16,14 @@ def main():
 
     cursor = get_database_cursor(dbcred)
 
-    print(cursor)
+    api = FastAPI
+
+    @api.get("/")
+    def read_root():
+        return {"Hello": "World"}
+
+    cursor.close()
+    cursor.connection.close()
 
 def get_database_cursor(credentials):
     
