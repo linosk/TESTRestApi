@@ -22,6 +22,10 @@ def main():
     def read_root():
         return {"Hello": "World"}
 
+    @api.post("/")
+    @api.delete("/")
+    @api.put("/")
+
     cursor.close()
     cursor.connection.close()
 
