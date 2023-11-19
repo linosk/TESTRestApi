@@ -1,1 +1,4 @@
 Tmp/
+credentials
+app/__pycache__/
+test/__pycache__/

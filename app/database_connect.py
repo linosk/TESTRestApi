@@ -1,8 +1,18 @@
+import json
 import psycopg2
+from psycopg2.extensions import cursor
 from psycopg2 import Error
 from psycopg2.extras import RealDictCursor
 
-def get_database_cursor(credentials):
+def get_credentials(path) -> dict:
+    
+    with open(path, 'r') as file:
+        credentials = json.load(file)
+
+    return credentials
+
+
+def get_database_cursor(credentials) -> cursor:
     
     try:
         connection = psycopg2.connect(
@@ -11,15 +21,12 @@ def get_database_cursor(credentials):
             host=credentials["host"],
             port=credentials["port"],
             database=credentials["database"],
-            cursor_factory=credentials["cursor_factory"]
+            #This makes it so that returned psql entries are dictonaries instead of tuples
+            cursor_factory=RealDictCursor
         )
 
         cursor = connection.cursor()
         print("Database connection was succesfull.")
-
-        #cursor.execute("SELECT * FROM games;")
-        #result = cursor.fetchall()
-        #print(result)
 
         return cursor
 
@@ -28,5 +35,6 @@ def get_database_cursor(credentials):
 
     finally:
         if connection is not None:
+            cursor.close()
             connection.close()
             print("Database connection closed.")
